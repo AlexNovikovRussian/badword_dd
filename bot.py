@@ -1,5 +1,4 @@
 from discord import Client
-from discord.utils import get
 
 CHANNEL_ID = 714770037780512808
 
@@ -13,13 +12,15 @@ badwords = [
 
 
 class Bot(Client):
+    def __init__(self):
+        self.badword_message = None
+        self.badword_user = None
+        self.bwans = None
+        self.incorrect_reactions_count = 0
+        self.correct_reactions_count = 0
+
     async def on_ready(self):
         print("Bot started as {0}".format(self.user.name))
-        self.correct_reactions_count = 0
-        self.incorrect_reactions_count = 0
-        self.bwans = None
-        self.badword_user = None
-        self.badword_message = None
 
     async def on_message(self, message):
         print("Message from {0}, which contains {1}, to channel with id {2}".format(message.author, message.content, message.channel.id))
@@ -62,4 +63,4 @@ class Bot(Client):
 
 
 client = Bot()
-client.run("NzE0Nzg5Njc5ODc0MTc5MDgy.Xszx2Q.2d7wsFpujLUPmgOZR9_3HtLIPSw")
+client.run('NzE0Nzg5Njc5ODc0MTc5MDgy.Xszx2Q.2d7wsFpujLUPmgOZR9_3HtLIPSw')
