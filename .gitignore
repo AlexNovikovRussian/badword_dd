@@ -4,4 +4,4 @@ venv/*
 venv
 .idea
 test.py
-venv/activate.bat
+venv/Scripts/activate.bat
