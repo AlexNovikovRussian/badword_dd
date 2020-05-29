@@ -72,5 +72,8 @@ class Bot(Client):
                     await self.bwans.delete()
 
 
+print(CHANNEL_ID)
+print(TARGET_REACTIONS_COUNT)
+
 client = Bot()
 client.run(env["DISCORD_TOKEN"])
