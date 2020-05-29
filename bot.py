@@ -1,16 +1,23 @@
 from discord import Client
+from fuzzywuzzy import fuzz
+from fuzzywuzzy import process
 from discord.utils import get
 
 CHANNEL_ID = 714790972051030096
 
+with open("badwords.txt") as file:
+    badwords = [row.strip().lower() for row in file]
+
 
 class Bot(Client):
-    def __init__(self):
+    def __init__(self, **options):
+        super().__init__(**options)
         self.badword_message = None
         self.bwans = None
         self.incorrect_reactions_count = 0
         self.correct_reactions_count = 0
         self.badword_state = False
+        self.badword_detected = False
 
     async def on_ready(self):
         print("Bot started as {0}".format(self.user.name))
@@ -18,21 +25,32 @@ class Bot(Client):
     async def on_message(self, message):
         print("Message from {message.author},which contains {message.content}, to channel with id {message.channel.id}")
 
-        if self.badword_state:
-            await message.delete()
-
         if message.channel.id == CHANNEL_ID:
-            for word in badwords:
-                if word in message.content:
-                    print("Bad word detected")
-                    self.bwans = await message.channel.send("Был обнаружен мат. Если согласен ставь <:correct:714834242390982756> , если же нет, то <:incorrect:714834242525331498>")
-                    self.badword_message = message
-                    self.badword_state = True
-                    await self.bwans.add_reaction("<:correct:714834242390982756>")
-                    await self.bwans.add_reaction("<:incorrect:714834242525331498>")
+            if self.badword_state:
+                await message.delete()
+                return
+
+            mess_arr = message.content.split(" ")
+
+            for word in mess_arr:
+                word = word.lower()
+                #if self.badword_detected:
+                #   break
+                for badword in badwords:
+                    if fuzz.ratio(word, badword) > 65:
+                        print("bad word detected")
+                        #self.badword_detected = True
+                        self.bwans = await message.channel.send("Был обнаружен мат. Если согласен ставь <:correct:714834242390982756> , если же нет, то <:incorrect:714834242525331498>")
+                        self.badword_message = message
+                        self.badword_state = True
+                        await self.bwans.add_reaction("<:correct:714834242390982756>")
+                        await self.bwans.add_reaction("<:incorrect:714834242525331498>")
+                        # break
+                        return
+            #self.badword_detected = False
 
     async def on_reaction_add(self, reaction, user):
-        print("New reaction from user {0}, its content {1}, from message {2}".format(user.name, reaction.emoji, reaction.message.content))
+        print("New reaction from user {user.name},its content {reaction.emoji},from message {reaction.message.content}")
 
         if reaction.message.id == self.bwans.id:
             if str(reaction.emoji.url) == "https://cdn.discordapp.com/emojis/714834242390982756.png":
