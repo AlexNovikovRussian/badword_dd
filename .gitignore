@@ -1,3 +1,6 @@
 .idea/*
 .git/*
 venv/*
+venv
+.idea
+test.py

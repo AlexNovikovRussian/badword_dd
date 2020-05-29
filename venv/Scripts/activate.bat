@@ -10,7 +10,7 @@ if defined _OLD_CODEPAGE (
 
 set VIRTUAL_ENV=A:\badwords_dd\venv
 
-set DISCORD_TOKEN=NzE0Nzg5Njc5ODc0MTc5MDgy.XtEHfg.0WCebl93UQOeItIkT3dbAboiYig
+set DISCORD_TOKEN=NzE0Nzg5Njc5ODc0MTc5MDgy.XtELjw.i-qfW3eY8SkbLccWiC8TpC2xcm4
 
 if not defined PROMPT set PROMPT=$P$G
 
