@@ -76,4 +76,4 @@ print(CHANNEL_ID)
 print(TARGET_REACTIONS_COUNT)
 
 client = Bot()
-client.run("NzE0Nzg5Njc5ODc0MTc5MDgy.XtTIGg.eGGO8ppCr3vSVtJYBQWuVOButc4")#env["DISCORD_TOKEN"])
+client.run("NzE0Nzg5Njc5ODc0MTc5MDgy.XtTIGg.eGGO8ppCr3vSVtJYBQWuVOButc4") #env["DISCORD_TOKEN"])
