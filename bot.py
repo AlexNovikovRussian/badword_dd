@@ -3,7 +3,7 @@ from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
 from os import environ as env
 
-CHANNEL_ID = env.get("CHANNEL_ID", 714790972051030096)
+CHANNEL_ID = 714770037780512808 #env.get("CHANNEL_ID", 714790972051030096)
 TARGET_REACTIONS_COUNT = env.get("TRC", 2)
 
 with open("badwords.txt", encoding='utf-8') as file:
@@ -23,7 +23,7 @@ class Bot(Client):
         print("Bot started as {0}".format(self.user.name))
 
     async def on_message(self, message):
-        print("Message from {message.author},which contains {message.content}, to channel with id {message.channel.id}")
+        print("Message from {0},which contains {1}, to channel with id {2}".format(message.author, message.content, message.channel.id))
 
         if message.channel.id == CHANNEL_ID:
             if self.badword_state:
@@ -75,4 +75,5 @@ print(CHANNEL_ID)
 print(TARGET_REACTIONS_COUNT)
 
 client = Bot()
-client.run(env["DISCORD_TOKEN"])
+client.run("NzE0Nzg5Njc5ODc0MTc5MDgy.XtTLpQ.5qlK8BjdOIj5MOpkdKVPKyVf1J8")
+#client.run(env["DISCORD_TOKEN"])
