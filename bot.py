@@ -3,7 +3,7 @@ from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
 from os import environ as env
 
-CHANNEL_ID = 714770037780512808 #env.get("CHANNEL_ID", 714790972051030096)
+CHANNEL_ID = env.get("CHANNEL_ID", 714790972051030096)
 TARGET_REACTIONS_COUNT = env.get("TRC", 2)
 
 with open("badwords.txt", encoding='utf-8') as file:
