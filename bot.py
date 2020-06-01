@@ -1,7 +1,6 @@
 from discord import Client
 from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
-from discord.utils import get
 from os import environ as env
 
 CHANNEL_ID = env.get("CHANNEL_ID", 714790972051030096)
